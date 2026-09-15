@@ -7,6 +7,8 @@ export default defineConfig({
   base: '/kimwoodzip-intro/',
   plugins: [react()],
   build: {
+    // lightningcss가 표준 backdrop-filter를 지우지 않도록 최신 브라우저를 대상으로 지정
+    cssTarget: ['chrome107', 'safari16', 'firefox110', 'edge107'],
     rollupOptions: {
       // 한국어(/)와 영어(/en/) 두 개의 페이지를 만듭니다.
       input: {
