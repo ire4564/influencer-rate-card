@@ -28,10 +28,10 @@
   padding: 0 20px;
   border: 1px solid rgba(245, 239, 230, 0.14);
   border-radius: 999px;
-  /* 뒤 내용이 비치지 않도록 불투명도와 흐림 정도를 올림 */
-  background: rgba(70, 48, 35, 0.92);
-  backdrop-filter: saturate(1.2) blur(22px);
-  -webkit-backdrop-filter: saturate(1.2) blur(22px);
+  /* 살짝 비치되 뒤 글자는 읽히지 않도록: 불투명도는 낮추고 흐림은 강하게 */
+  background: rgba(70, 48, 35, 0.74);
+  backdrop-filter: saturate(1.4) blur(28px);
+  -webkit-backdrop-filter: saturate(1.4) blur(28px);
   box-shadow: 0 10px 30px rgba(42, 29, 21, 0.18);
   pointer-events: auto;
 }
