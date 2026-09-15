@@ -6,8 +6,46 @@ import { LANGUAGES, languageHref, useCopy } from '../i18n/index.jsx'
 export default function LanguageSwitcher() {
   const { lang, copy } = useCopy()
   const [open, setOpen] = useState(false)
+  // 배경이 어두운 구간(문의 · 푸터) 위에 오면 글씨를 밝게 바꿉니다.
+  const [onDark, setOnDark] = useState(false)
   const rootRef = useRef(null)
   const current = LANGUAGES.find((language) => language.code === lang)
+
+  useEffect(() => {
+    const darkAreas = [...document.querySelectorAll('.section--dark, .footer')]
+    if (darkAreas.length === 0) return
+
+    function update() {
+      const button = rootRef.current?.querySelector('.lang__button')
+      if (!button) return
+      const box = button.getBoundingClientRect()
+      const middle = box.top + box.height / 2
+      setOnDark(
+        darkAreas.some((area) => {
+          const rect = area.getBoundingClientRect()
+          return rect.top <= middle && rect.bottom >= middle
+        }),
+      )
+    }
+
+    let frame = 0
+    function onScroll() {
+      if (frame) return
+      frame = requestAnimationFrame(() => {
+        frame = 0
+        update()
+      })
+    }
+
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [])
 
   useEffect(() => {
     if (!open) return
@@ -28,7 +66,7 @@ export default function LanguageSwitcher() {
   }, [open])
 
   return (
-    <div className={`lang${open ? ' is-open' : ''}`} ref={rootRef}>
+    <div className={`lang${open ? ' is-open' : ''}${onDark ? ' is-on-dark' : ''}`} ref={rootRef}>
       <button
         type="button"
         className="lang__button"

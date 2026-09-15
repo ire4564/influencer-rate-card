@@ -157,11 +157,18 @@
   letter-spacing: 0.02em;
   color: var(--walnut-900);
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition:
+    color 0.25s,
+    opacity 0.2s;
 }
 
 .lang__button:hover {
   opacity: 0.6;
+}
+
+/* 어두운 배경 구간 위에서는 밝은 글씨로 */
+.lang.is-on-dark .lang__button {
+  color: var(--linen);
 }
 
 /* 평소엔 아래 화살표, 드롭다운이 열리면 위 화살표 */
