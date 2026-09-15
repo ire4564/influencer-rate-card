@@ -32,7 +32,7 @@ function localizePricing(lang) {
   }
 }
 
-// 배포 경로(.../influencer-rate-card/en/)에서 현재 언어를 읽습니다.
+// 배포 경로(.../kimwoodzip-intro/en/)에서 현재 언어를 읽습니다.
 export function detectLanguage(pathname = window.location.pathname) {
   return pathname.replace(/\/+$/, '').endsWith('/en') ? 'en' : 'ko'
 }

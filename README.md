@@ -55,6 +55,6 @@ src/
 
 1. GitHub 레포 → Settings → Pages → Source를 **GitHub Actions**로 설정
 2. `main`에 푸시
-3. https://ire4564.github.io/influencer-rate-card/ 에서 확인
+3. https://ire4564.github.io/kimwoodzip-intro/ 에서 확인
 
 레포 이름을 바꾸면 `vite.config.js`의 `base`도 함께 바꿔야 합니다.
