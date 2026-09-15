@@ -1,0 +1,61 @@
+/* 콘텐츠 강점 */
+
+/* Strengths */
+.pull-quote {
+  max-width: 820px;
+  padding-left: 24px;
+  border-left: 3px solid var(--oak-300);
+  font-size: clamp(16px, 2vw, 16px);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+  color: var(--walnut-700);
+}
+
+.strength-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 48px;
+}
+
+.strength {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.strength__stat {
+  font-size: clamp(20px, 2.2vw, 24px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--walnut-500);
+  font-variant-numeric: tabular-nums;
+}
+
+.strength__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--walnut-700);
+}
+
+.strength__desc {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 640px) {
+  .strength__desc,
+  .step__desc,
+  .terms__row,
+  .extra-table,
+  .metric__label {
+    font-size: 13px;
+  }
+}

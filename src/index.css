@@ -1,0 +1,11 @@
+/* 영역별 스타일 파일을 불러옵니다. 아래 순서대로 우선순위가 적용됩니다. */
+@import './styles/base.css';
+@import './styles/nav.css';
+@import './styles/hero.css';
+@import './styles/section.css';
+@import './styles/audience.css';
+@import './styles/metrics.css';
+@import './styles/strengths.css';
+@import './styles/rates.css';
+@import './styles/calculator.css';
+@import './styles/process.css';

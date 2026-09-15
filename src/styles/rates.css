@@ -1,0 +1,322 @@
+/* 광고 상품 단가 · 단가 산정 근거 */
+
+/* Rate card */
+/* 상품 수가 적어 카드가 폭에 맞춰 자동으로 배치되도록 */
+.price-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(216px, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.price-group {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  background: var(--linen);
+  border: 1px solid var(--line);
+}
+
+.price-group--reels {
+  background: var(--walnut-900);
+  border-color: var(--walnut-900);
+  color: var(--linen);
+}
+
+.price-group__head {
+  display: grid;
+  gap: 2px;
+  padding-bottom: 16px;
+}
+
+.price-group__head h3 {
+  font-size: clamp(18px, 2vw, 20px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.price-group__head p {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.price-group__lead {
+  margin-top: 8px;
+  justify-self: start;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--paper);
+  color: var(--walnut-500);
+}
+
+.price-group--reels .price-group__head p {
+  color: rgba(245, 239, 230, 0.7);
+}
+
+.price-group--reels .price-group__lead {
+  background: rgba(245, 239, 230, 0.12);
+  color: var(--oak-200);
+}
+
+.price-group__price {
+  margin-top: auto;
+  padding-top: 18px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.price-list {
+  display: grid;
+}
+
+.price-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+.price-group--reels .price-item {
+  border-color: rgba(245, 239, 230, 0.14);
+  padding: 20px 0;
+}
+
+.price-item__text {
+  display: grid;
+  min-width: 0;
+}
+
+.price-item__name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.price-item__name em {
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+  background: var(--oak-300);
+  color: var(--walnut-900);
+}
+
+.price-item__desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.price-group--reels .price-item__desc {
+  color: rgba(245, 239, 230, 0.6);
+}
+
+.price-item__price {
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.price-group--reels .price-item__price {
+  font-size: clamp(16px, 1.6vw, 18px);
+}
+
+/* 3단 카드는 폭이 좁아 가격을 이름 아래로 내립니다 */
+.price-group:not(.price-group--reels) .price-item {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.price-group:not(.price-group--reels) .price-item__price {
+  text-align: left;
+}
+
+.rate-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.panel {
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  background: var(--linen);
+  border: 1px solid var(--line);
+}
+
+.panel__title {
+  margin-bottom: 14px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.panel__note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.terms__row {
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.terms__row dt {
+  font-weight: 600;
+  color: var(--walnut-700);
+}
+
+.terms__row dd {
+  color: var(--ink-soft);
+}
+
+.extra-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.extra-table th {
+  padding: 0 0 8px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-mute);
+}
+
+.extra-table th:last-child,
+.extra-table td:last-child {
+  text-align: right;
+}
+
+.extra-table td {
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.extra-table td:first-child {
+  font-weight: 600;
+  color: var(--walnut-700);
+}
+
+.extra-table td:last-child {
+  padding-left: 12px;
+  font-weight: 600;
+}
+
+/* Rationale */
+.rationale {
+  padding: 80px 0;
+}
+
+.rationale__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.rationale__title {
+  margin-top: 10px;
+  font-size: clamp(20px, 2.4vw, 25px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.rationale__text {
+  margin-top: 12px;
+  color: var(--ink-soft);
+}
+
+.reasons {
+  display: grid;
+  gap: 8px;
+}
+
+.reasons li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-weight: 600;
+  color: var(--walnut-700);
+}
+
+.reasons li span {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--walnut-600);
+  color: var(--linen);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .price-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .price-item__price {
+    text-align: left;
+  }
+}
+
+@media (max-width: 860px) {
+  .rationale__inner {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .price-group,
+  .promo-block {
+    padding: 22px 18px;
+  }
+
+  .price-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .price-item__price {
+    text-align: left;
+  }
+
+  .terms__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .extra-table td:first-child {
+    padding-right: 8px;
+  }
+}

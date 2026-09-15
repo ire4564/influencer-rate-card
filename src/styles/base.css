@@ -1,0 +1,226 @@
+/* 토큰 · 리셋 · 공통 요소 */
+
+/* ───────────── Tokens ───────────── */
+:root {
+  --linen: #f5efe6;
+  --linen-deep: #ece3d5;
+  --paper: #fffcf7;
+  --walnut-900: #2a1d15;
+  --walnut-700: #4a3326;
+  --walnut-600: #5b3d2a;
+  --walnut-500: #7a5439;
+  --oak-300: #c9a57f;
+  --oak-200: #dcc3a5;
+  --sage: #7c8a68;
+  --sage-soft: #e3e6d6;
+  --ink: #2a1d15;
+  --ink-soft: #6b5a4d;
+  --ink-mute: #9a8a7c;
+  --line: #e2d6c6;
+  --line-strong: #cdbba5;
+
+  --font-sans:
+    'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo',
+    'Noto Sans KR', 'Malgun Gothic', sans-serif;
+
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --shadow: 0 1px 2px rgba(42, 29, 21, 0.04), 0 8px 24px rgba(42, 29, 21, 0.06);
+  --nav-h: 56px;
+  --nav-top: 14px;
+  /* 떠 있는 메뉴 아래로 콘텐츠가 가려지지 않도록 쓰는 전체 높이 */
+  --nav-space: calc(var(--nav-top) + var(--nav-h));
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-space) + 16px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--linen);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd,
+blockquote,
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea,
+table {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--walnut-500);
+  outline-offset: 2px;
+}
+
+/* 콘텐츠는 떠 있는 메뉴 바(1072px)보다 좌우 24px씩 안쪽으로 들어옵니다 */
+.container {
+  width: 100%;
+  max-width: 990px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--walnut-500);
+}
+
+/* ───────────── Buttons ───────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    transform 0.2s;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--primary {
+  background: var(--walnut-600);
+  color: var(--paper);
+}
+
+.btn--primary:hover {
+  background: var(--walnut-700);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--walnut-700);
+}
+
+.btn--ghost:hover {
+  background: var(--paper);
+  border-color: var(--walnut-500);
+}
+
+.btn--light {
+  background: var(--linen);
+  color: var(--walnut-900);
+}
+
+.btn--light:hover {
+  background: #fff;
+}
+
+.btn--outline-light {
+  border-color: rgba(245, 239, 230, 0.35);
+  color: var(--linen);
+}
+
+.btn--outline-light:hover {
+  border-color: var(--linen);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn--sm {
+  min-height: 38px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+.is-muted {
+  color: var(--ink-mute) !important;
+  font-weight: 500 !important;
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 15px;
+  }
+
+  .btn {
+    min-height: 44px;
+    padding: 0 18px;
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .eyebrow {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+  }
+}

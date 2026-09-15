@@ -1,0 +1,84 @@
+/* 타깃 */
+
+/* Audience */
+.target-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.target {
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.target__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--walnut-700);
+}
+
+.target__title::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin: 0 10px 3px 0;
+  border-radius: 50%;
+  background: var(--sage);
+}
+
+.target__desc {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 28px;
+  border-top: 1px solid var(--line-strong);
+}
+
+.info-row__item {
+  padding: 18px 4px 0;
+}
+
+.info-row__item dt {
+  font-size: 13px;
+  color: var(--ink-mute);
+}
+
+.info-row__item dd {
+  margin-top: 2px;
+  font-weight: 600;
+  color: var(--walnut-700);
+}
+
+@media (max-width: 860px) {
+  .target-grid,
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .target__desc,
+  .reasons li,
+  .price-item__name {
+    font-size: 14px;
+  }
+
+  .target-grid,
+  .steps,
+  .info-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .info-row__item {
+    padding-top: 14px;
+  }
+}
