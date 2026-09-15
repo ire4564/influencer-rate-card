@@ -136,7 +136,8 @@
 /* 언어 선택 · 메뉴와 별개로 화면 오른쪽 위에 고정 */
 .lang {
   position: fixed;
-  top: var(--nav-top);
+  /* 메뉴 알약보다 12px 위로 */
+  top: calc(var(--nav-top) - 12px);
   right: 20px;
   z-index: 51;
   display: flex;
