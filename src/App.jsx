@@ -73,9 +73,9 @@ export default function App() {
               </li>
             ))}
           </ul>
-          <LanguageSwitcher />
         </div>
       </nav>
+      <LanguageSwitcher />
       <main>
         <Hero />
         <Audience />
