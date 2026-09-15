@@ -465,6 +465,10 @@
 }
 
 @media (max-width: 860px) {
+  .calc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .calc__summary {
     position: static;
   }
@@ -500,7 +504,6 @@
 
 @media (max-width: 640px) {
   .calc-group,
-  .panel,
   .summary {
     padding: 20px 18px;
   }

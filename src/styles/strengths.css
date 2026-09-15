@@ -51,11 +51,7 @@
 }
 
 @media (max-width: 640px) {
-  .strength__desc,
-  .step__desc,
-  .terms__row,
-  .extra-table,
-  .metric__label {
+  .strength__desc {
     font-size: 13px;
   }
 }

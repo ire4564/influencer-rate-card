@@ -290,14 +290,34 @@
 }
 
 @media (max-width: 860px) {
+  .rate-split,
+  .price-groups,
+  .rationale__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .rationale__inner {
     gap: 24px;
   }
 }
 
 @media (max-width: 640px) {
-  .price-group,
-  .promo-block {
+  .reasons li,
+  .price-item__name {
+    font-size: 14px;
+  }
+
+  .price-item__desc,
+  .price-group__head p {
+    font-size: 12px;
+  }
+
+  .terms__row,
+  .extra-table {
+    font-size: 13px;
+  }
+
+  .price-group {
     padding: 22px 18px;
   }
 
@@ -318,5 +338,9 @@
 
   .extra-table td:first-child {
     padding-right: 8px;
+  }
+
+  .panel {
+    padding: 20px 18px;
   }
 }

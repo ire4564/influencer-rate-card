@@ -54,9 +54,7 @@
 }
 
 @media (max-width: 640px) {
-  .section-head__desc,
-  .promo-block__intro > p:not(.eyebrow),
-  .checklist li {
+  .section-head__desc {
     font-size: 14px;
   }
 

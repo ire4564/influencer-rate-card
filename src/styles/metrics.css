@@ -218,6 +218,10 @@
 }
 
 @media (max-width: 860px) {
+  .promo-block {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .metric-grid,
   .metric-grid--five {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -225,10 +229,12 @@
 }
 
 @media (max-width: 640px) {
+  .promo-block__intro > p:not(.eyebrow) {
+    font-size: 14px;
+  }
+
   .metric__sub,
-  .footnotes,
-  .price-item__desc,
-  .price-group__head p {
+  .footnotes {
     font-size: 12px;
   }
 
@@ -243,5 +249,13 @@
   .promo-stats,
   .promo-block__compare {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .metric__label {
+    font-size: 13px;
+  }
+
+  .promo-block {
+    padding: 22px 18px;
   }
 }
