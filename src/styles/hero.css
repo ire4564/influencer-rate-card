@@ -46,6 +46,11 @@
   color: var(--walnut-700);
 }
 
+/* 소개 문구는 줄 단위로 나눠 두고, 필요하면 모바일에서 한 문장으로 이어 붙입니다 */
+.hero__lead-line {
+  display: block;
+}
+
 .hero__sub {
   margin-top: 12px;
   max-width: 540px;
@@ -279,6 +284,14 @@
 }
 
 @media (max-width: 640px) {
+  .hero__lead--flow .hero__lead-line {
+    display: inline;
+  }
+
+  .hero__lead--flow .hero__lead-line + .hero__lead-line::before {
+    content: ' ';
+  }
+
   .hero__sub {
     font-size: 12px;
   }

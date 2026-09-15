@@ -26,6 +26,8 @@ export function createEnCopy({ i, f, account, pricing }) {
         'A lifestyle account built around wood-toned interiors,',
         'home café moments and newlywed living',
       ],
+      // 모바일에서는 줄바꿈 없이 한 문장으로 이어서 보여줍니다.
+      introFlowOnMobile: true,
       introSub:
         'Products are introduced naturally inside a real home, which makes this account a strong fit for interior, furniture and household brands',
       photos: [

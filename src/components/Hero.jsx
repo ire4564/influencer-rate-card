@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import { profile } from '../data/profile.js'
 import { useCopy } from '../i18n/index.jsx'
 import HeroActions from './HeroActions.jsx'
@@ -27,12 +26,11 @@ export default function Hero() {
             <span className="hero__at">@</span>
             {profile.handle}
           </h1>
-          <p className="hero__lead">
-            {t.introLines.map((line, index) => (
-              <Fragment key={line}>
-                {index > 0 && <br />}
+          <p className={`hero__lead${t.introFlowOnMobile ? ' hero__lead--flow' : ''}`}>
+            {t.introLines.map((line) => (
+              <span key={line} className="hero__lead-line">
                 {line}
-              </Fragment>
+              </span>
             ))}
           </p>
           <p className="hero__sub">{t.introSub}</p>
