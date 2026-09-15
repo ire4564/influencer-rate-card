@@ -1,30 +1,28 @@
-import { processSteps, productionLeadTime } from '../../data/profile.js'
+import { useCopy } from '../../i18n/index.jsx'
 import SectionHead from '../SectionHead.jsx'
 
 export default function Process() {
+  const { copy } = useCopy()
+  const t = copy.process
+
   return (
     <section className="section" id="process">
       <div className="container">
-        <SectionHead
-          index={6}
-          eyebrow="Process"
-          title="진행 절차"
-          desc="일반적으로 제품 수령 후 아래 기간의 제작 기간이 필요합니다."
-        />
+        <SectionHead index={6} eyebrow={t.eyebrow} title={t.title} desc={t.desc} />
         <dl className="lead-times">
-          {productionLeadTime.map((l) => (
-            <div key={l.label} className="lead-times__item">
-              <dt>{l.label}</dt>
-              <dd>{l.value}</dd>
+          {t.leadTimes.map((lead) => (
+            <div key={lead.label} className="lead-times__item">
+              <dt>{lead.label}</dt>
+              <dd>{lead.value}</dd>
             </div>
           ))}
         </dl>
         <ol className="steps">
-          {processSteps.map((s, idx) => (
-            <li key={s.title} className="step">
-              <span className="step__num">STEP {idx + 1}</span>
-              <h3 className="step__title">{s.title}</h3>
-              <p className="step__desc">{s.desc}</p>
+          {t.steps.map((step, index) => (
+            <li key={step.title} className="step">
+              <span className="step__num">{t.stepLabel(index + 1)}</span>
+              <h3 className="step__title">{step.title}</h3>
+              <p className="step__desc">{step.desc}</p>
             </li>
           ))}
         </ol>

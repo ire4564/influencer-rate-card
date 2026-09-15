@@ -1,20 +1,19 @@
-import { inquiryChecklist, profile } from '../../data/profile.js'
+import { profile } from '../../data/profile.js'
+import { useCopy } from '../../i18n/index.jsx'
 import SectionHead from '../SectionHead.jsx'
 
 export default function Contact() {
+  const { copy } = useCopy()
+  const t = copy.contact
+
   return (
     <section className="section section--dark" id="contact">
       <div className="container contact">
         <div>
-          <SectionHead
-            index={7}
-            eyebrow="Contact"
-            title="캠페인 문의"
-            desc="아래 내용을 포함해 인스타그램 DM 또는 이메일로 문의 부탁드립니다."
-          />
+          <SectionHead index={7} eyebrow={t.eyebrow} title={t.title} desc={t.desc} />
           <div className="contact__actions">
             <a className="btn btn--light" href={profile.dmUrl} target="_blank" rel="noreferrer">
-              Instagram DM @{profile.handle}
+              {t.dm}
             </a>
             <a className="btn btn--outline-light" href={`mailto:${profile.email}`}>
               {profile.email}
@@ -22,8 +21,8 @@ export default function Contact() {
           </div>
         </div>
         <ul className="checklist">
-          {inquiryChecklist.map((c) => (
-            <li key={c}>{c}</li>
+          {t.checklist.map((item) => (
+            <li key={item}>{item}</li>
           ))}
         </ul>
       </div>

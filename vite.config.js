@@ -1,3 +1,4 @@
+import { resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
@@ -5,4 +6,13 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   base: '/influencer-rate-card/',
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      // 한국어(/)와 영어(/en/) 두 개의 페이지를 만듭니다.
+      input: {
+        main: resolve(import.meta.dirname, 'index.html'),
+        en: resolve(import.meta.dirname, 'en/index.html'),
+      },
+    },
+  },
 })

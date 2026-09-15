@@ -4,11 +4,13 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 import 'swiper/css/pagination'
-import { homePhotos } from '../data/profile.js'
+import { useCopy } from '../i18n/index.jsx'
 
 const photoUrl = (file) => `${import.meta.env.BASE_URL}home/${file}`
 
 export default function HomeSlider() {
+  const { copy } = useCopy()
+  const homePhotos = copy.hero.photos
   // 불러오지 못한 사진은 슬라이드에서 빼서 사진만 이어서 보여줍니다.
   const [missing, setMissing] = useState(() => new Set())
   // 첫 화면이 빨리 뜨도록 첫 장만 먼저 받고, 나머지는 첫 장을 받은 뒤에 이어서 받습니다.
@@ -31,9 +33,9 @@ export default function HomeSlider() {
       autoplay={{ delay: 1500, disableOnInteraction: false }}
       pagination={{ clickable: true }}
       a11y={{
-        prevSlideMessage: '이전 사진',
-        nextSlideMessage: '다음 사진',
-        paginationBulletMessage: '{{index}}번째 사진 보기',
+        prevSlideMessage: copy.hero.slider.prev,
+        nextSlideMessage: copy.hero.slider.next,
+        paginationBulletMessage: copy.hero.slider.bullet,
       }}
     >
       {photos.map((photo, index) => {

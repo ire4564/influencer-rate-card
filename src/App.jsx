@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Calculator from './components/calculator/Calculator.jsx'
 import Hero from './components/Hero.jsx'
+import LanguageSwitcher from './components/LanguageSwitcher.jsx'
 import Audience from './components/sections/Audience.jsx'
 import Contact from './components/sections/Contact.jsx'
 import Footer from './components/sections/Footer.jsx'
@@ -9,17 +10,11 @@ import Process from './components/sections/Process.jsx'
 import RateCard from './components/sections/RateCard.jsx'
 import Rationale from './components/sections/Rationale.jsx'
 import Strengths from './components/sections/Strengths.jsx'
-
-const navItems = [
-  { href: '#about', label: '타깃' },
-  { href: '#metrics', label: '지표' },
-  { href: '#rates', label: '단가' },
-  { href: '#calculator', label: '계산기' },
-  { href: '#process', label: '진행 절차' },
-  { href: '#contact', label: '문의' },
-]
+import { useCopy } from './i18n/index.jsx'
 
 export default function App() {
+  const { copy } = useCopy()
+  const navItems = copy.nav.items
   const [activeSection, setActiveSection] = useState(navItems[0].href.slice(1))
 
   useEffect(() => {
@@ -59,11 +54,11 @@ export default function App() {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
     }
-  }, [])
+  }, [navItems])
 
   return (
     <>
-      <nav className="nav" aria-label="주요 메뉴">
+      <nav className="nav" aria-label={copy.nav.label}>
         <div className="container nav__inner">
           <ul className="nav__links">
             {navItems.map((item) => (
@@ -78,6 +73,7 @@ export default function App() {
               </li>
             ))}
           </ul>
+          <LanguageSwitcher />
         </div>
       </nav>
       <main>

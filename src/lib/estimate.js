@@ -1,14 +1,10 @@
-import { extras, products, retentionOptions } from '../data/pricing.js'
 import { profile } from '../data/profile.js'
 
-export const formatWon = (value) => `${Math.round(value).toLocaleString('ko-KR')}원`
-
-export const formatRange = (min, max) =>
-  min === max ? formatWon(min) : `${formatWon(min)} ~ ${formatWon(max)}`
-
-// 선택 상태를 받아 예상 광고비를 계산합니다.
+// 선택 상태와 (언어에 맞게 번역된) 상품 정보를 받아 예상 광고비를 계산합니다.
 // 비율 옵션(재게시·급행)은 선택한 상품 합계(기본 단가)에만 적용됩니다.
-export function estimate({ quantities, retentionId, selectedExtras }) {
+export function estimate({ quantities, retentionId, selectedExtras, pricing, quoteCopy }) {
+  const products = pricing.productGroups.flatMap((group) => group.items)
+
   const productLines = products
     .filter((p) => quantities[p.id] > 0)
     .map((p) => {
@@ -27,20 +23,16 @@ export function estimate({ quantities, retentionId, selectedExtras }) {
   const extraLines = []
   const negotiable = []
 
-  const retention = retentionOptions.find((r) => r.id === retentionId)
+  const retention = pricing.retentionOptions.find((r) => r.id === retentionId)
   if (hasContent && retention) {
-    if (retention.fee === null) negotiable.push(`콘텐츠 유지 기간 ${retention.label}`)
+    const label = quoteCopy.retentionLabel(retention.label)
+    if (retention.fee === null) negotiable.push(label)
     else if (retention.fee > 0) {
-      extraLines.push({
-        id: 'retention',
-        label: `콘텐츠 유지 기간 ${retention.label}`,
-        min: retention.fee,
-        max: retention.fee,
-      })
+      extraLines.push({ id: 'retention', label, min: retention.fee, max: retention.fee })
     }
   }
 
-  for (const extra of extras) {
+  for (const extra of pricing.extras) {
     if (!selectedExtras.has(extra.id) || !hasContent) continue
     if (extra.type === 'negotiable') {
       negotiable.push(extra.name)
@@ -71,35 +63,31 @@ export function estimate({ quantities, retentionId, selectedExtras }) {
   }
 }
 
-export function buildQuoteText(result) {
+// DM·메일로 보낼 견적 내용
+export function buildQuoteText(result, quoteCopy, f) {
   const rows = [
-    `[@${profile.handle} 광고 견적 문의]`,
+    quoteCopy.heading,
     '',
-    '■ 선택 항목',
-    ...result.productLines.map((l) => `- ${l.label}: ${formatRange(l.min, l.max)}`),
-    ...result.extraLines.map((l) => `- ${l.label}: ${formatRange(l.min, l.max)}`),
+    quoteCopy.selected,
+    ...result.productLines.map((l) => `- ${l.label}: ${f.wonRange(l.min, l.max)}`),
+    ...result.extraLines.map((l) => `- ${l.label}: ${f.wonRange(l.min, l.max)}`),
   ]
   if (result.negotiable.length) {
-    rows.push('', '■ 별도 협의 항목', ...result.negotiable.map((n) => `- ${n}`))
+    rows.push('', quoteCopy.negotiableHeading, ...result.negotiable.map((n) => `- ${n}`))
   }
   rows.push(
     '',
-    `■ 예상 광고비 (부가세 포함): ${formatRange(result.min, result.max)}`,
-    result.negotiable.length ? '  ※ 별도 협의 항목 비용은 제외된 금액입니다.' : '',
-    result.hasRangePrice ? '  ※ 범위 단가는 촬영 난이도와 요청 범위에 따라 협의 후 확정됩니다.' : '',
+    quoteCopy.total(f.wonRange(result.min, result.max)),
+    result.negotiable.length ? quoteCopy.negotiableNote : '',
+    result.hasRangePrice ? quoteCopy.rangeNote : '',
     '',
-    '■ 캠페인 정보',
-    '- 브랜드명 / 담당자명: ',
-    '- 제품명 / 제품 링크: ',
-    '- 희망 업로드 일정: ',
-    '- 캠페인 주요 내용 및 필수 요청사항: ',
-    '- 제품 제공 및 배송 조건: ',
+    quoteCopy.campaignHeading,
+    ...quoteCopy.campaignFields,
   )
   return rows.filter((row, i, arr) => row !== '' || arr[i - 1] !== '').join('\n')
 }
 
 // 견적 내용을 담아 메일 앱을 여는 링크
-export function buildMailHref(quoteText) {
-  const subject = encodeURIComponent(`[광고 문의] @${profile.handle} 캠페인 견적`)
-  return `mailto:${profile.email}?subject=${subject}&body=${encodeURIComponent(quoteText)}`
+export function buildMailHref(quoteText, subject) {
+  return `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(quoteText)}`
 }

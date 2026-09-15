@@ -1,4 +1,4 @@
-import { extras, productGroups, retentionOptions } from '../../data/pricing.js'
+import { useCopy } from '../../i18n/index.jsx'
 import ProductStepper from './ProductStepper.jsx'
 
 function Group({ step, title, hint, children }) {
@@ -26,9 +26,13 @@ export default function CalculatorOptions({
   onExtraToggle,
   hasVideo,
 }) {
+  const { copy, pricing } = useCopy()
+  const t = copy.calculator
+  const { productGroups, retentionOptions, extras } = pricing
+
   return (
     <div className="calc__options">
-      <Group step={1} title="광고 상품 선택" hint="여러 상품을 함께 선택하거나 수량을 조절할 수 있어요.">
+      <Group step={1} title={t.steps.products} hint={t.steps.productsHint}>
         <div className="calc-product-groups">
           {productGroups.map((group) => (
             <div key={group.id} className="calc-product-group">
@@ -48,7 +52,7 @@ export default function CalculatorOptions({
         </div>
       </Group>
 
-      <Group step={2} title="콘텐츠 유지 기간">
+      <Group step={2} title={t.steps.retention}>
         <div className="segmented" role="radiogroup">
           {retentionOptions.map((option) => (
             <label
@@ -69,7 +73,7 @@ export default function CalculatorOptions({
         </div>
       </Group>
 
-      <Group step={3} title="추가 옵션">
+      <Group step={3} title={t.steps.extras}>
         <div className="calc-extras">
           {extras.map((extra) => {
             // 영상 상품을 고르지 않으면 원본 영상 제공 같은 옵션은 선택할 수 없습니다.
@@ -89,7 +93,7 @@ export default function CalculatorOptions({
                 <span className="calc-check" aria-hidden="true" />
                 <span className="calc-extra__name">
                   {extra.name}
-                  {disabled && <em>릴스 또는 피드 + 릴스 패키지 선택 시 가능</em>}
+                  {disabled && <em>{t.videoOnly}</em>}
                 </span>
                 <span className={`calc-extra__price${extra.type === 'negotiable' ? ' is-muted' : ''}`}>
                   {extra.priceLabel}

@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { profile } from '../data/profile.js'
-import { approx, insights, num, pct } from '../lib/insights.js'
+import { useCopy } from '../i18n/index.jsx'
 import HeroActions from './HeroActions.jsx'
 import HomeSlider from './HomeSlider.jsx'
 
@@ -14,16 +14,10 @@ function daysSince(dateString) {
 }
 
 export default function Hero() {
+  const { copy } = useCopy()
+  const t = copy.hero
   const days = daysSince(profile.openedAt)
   const months = Math.floor(days / 30)
-  const [y, m, d] = profile.openedAt.split('-')
-
-  const stats = [
-    { label: '팔로워', value: num(insights.followers), unit: '명' },
-    { label: '비팔로워 조회', value: pct(insights.nonFollowerViewShare, 0), unit: '' },
-    { label: '릴스 평균 도달', value: approx(insights.reachMean), unit: '명' },
-    { label: '릴스 중앙 도달', value: approx(insights.reachMedian), unit: '명' },
-  ]
 
   return (
     <header className="hero" id="top">
@@ -34,39 +28,36 @@ export default function Hero() {
             {profile.handle}
           </h1>
           <p className="hero__lead">
-            {profile.introLines.map((line, index) => (
+            {t.introLines.map((line, index) => (
               <Fragment key={line}>
                 {index > 0 && <br />}
                 {line}
               </Fragment>
             ))}
           </p>
-          <p className="hero__sub">{profile.introSub}</p>
+          <p className="hero__sub">{t.introSub}</p>
           <HeroActions className="hero__actions--desktop" />
         </div>
 
-        <aside className="hero__card" aria-label="계정 기본 정보">
+        <aside className="hero__card" aria-label={t.cardLabel}>
           <div className="hero__arch">
             <HomeSlider />
             <div className="hero__arch-caption" aria-hidden="true">
-              <span className="hero__arch-sub">wood · home café · newlywed</span>
+              <span className="hero__arch-sub">{t.photoCaption}</span>
             </div>
           </div>
           <dl className="hero__stats">
-            {stats.map((s) => (
-              <div key={s.label} className="hero__stat">
-                <dt>{s.label}</dt>
+            {t.stats.map((stat) => (
+              <div key={stat.label} className="hero__stat">
+                <dt>{stat.label}</dt>
                 <dd>
-                  {s.value}
-                  {s.unit && <small>{s.unit}</small>}
+                  {stat.value}
+                  {stat.unit && <small>{stat.unit}</small>}
                 </dd>
               </div>
             ))}
           </dl>
-          <p className="hero__meta">
-            {y}.{m}.{d} 개설 · 운영 {days}일째(약 {months}개월) · 게시물 {profile.posts}개 ·{' '}
-            {profile.postingFrequency}
-          </p>
+          <p className="hero__meta">{t.meta({ days, months })}</p>
         </aside>
 
         <HeroActions className="hero__actions--mobile" />

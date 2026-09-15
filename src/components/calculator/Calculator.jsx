@@ -1,14 +1,19 @@
-import { useEffect, useRef, useState } from 'react'
-import { products } from '../../data/pricing.js'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCopy } from '../../i18n/index.jsx'
 import { estimate } from '../../lib/estimate.js'
 import SectionHead from '../SectionHead.jsx'
 import CalculatorOptions from './CalculatorOptions.jsx'
 import EstimateSummary from './EstimateSummary.jsx'
 import FloatingTotal from './FloatingTotal.jsx'
 
-const initialQuantities = Object.fromEntries(products.map((p) => [p.id, 0]))
-
 export default function Calculator() {
+  const { copy, pricing } = useCopy()
+  const t = copy.calculator
+  const initialQuantities = useMemo(
+    () => Object.fromEntries(pricing.productGroups.flatMap((g) => g.items).map((p) => [p.id, 0])),
+    [pricing],
+  )
+
   const [quantities, setQuantities] = useState(initialQuantities)
   const [retentionId, setRetentionId] = useState('6m')
   const [selectedExtras, setSelectedExtras] = useState(() => new Set())
@@ -17,7 +22,13 @@ export default function Calculator() {
   const summaryRef = useRef(null)
   const sectionRef = useRef(null)
 
-  const result = estimate({ quantities, retentionId, selectedExtras })
+  const result = estimate({
+    quantities,
+    retentionId,
+    selectedExtras,
+    pricing,
+    quoteCopy: copy.quote,
+  })
 
   // 계산기 구간에 있으면서 견적 카드가 화면 밖일 때만 하단 합계 바를 띄웁니다.
   useEffect(() => {
@@ -51,12 +62,7 @@ export default function Calculator() {
   return (
     <section className="section section--calc" id="calculator" ref={sectionRef}>
       <div className="container">
-        <SectionHead
-          index={5}
-          eyebrow="Estimate"
-          title="광고비 계산기"
-          desc="원하는 상품과 옵션을 선택하면 예상 집행 광고비가 바로 계산됩니다."
-        />
+        <SectionHead index={5} eyebrow={t.eyebrow} title={t.title} desc={t.desc} />
 
         <div className="calc">
           <CalculatorOptions
