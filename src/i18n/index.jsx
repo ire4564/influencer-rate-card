@@ -12,8 +12,8 @@ import { createEnCopy } from './copy.en.jsx'
 import { extraLabels, groupLabels, itemLabels, retentionLabels } from './pricing.en.js'
 
 export const LANGUAGES = [
-  { code: 'ko', name: '한국어', path: '' },
-  { code: 'en', name: 'English', path: 'en/' },
+  { code: 'ko', name: '한국어', short: 'KR', path: '' },
+  { code: 'en', name: 'English', short: 'EN', path: 'en/' },
 ]
 
 // 금액은 src/data/pricing.js 하나만 쓰고, 영어일 때 이름과 설명만 바꿔 끼웁니다.
