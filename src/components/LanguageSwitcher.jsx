@@ -38,12 +38,12 @@ export default function LanguageSwitcher() {
         onClick={() => setOpen((prev) => !prev)}
       >
         {current?.short}
-        <svg viewBox="0 0 10 14" className="lang__arrow" aria-hidden="true">
+        <svg viewBox="0 0 10 6" className="lang__arrow" aria-hidden="true">
           <path
-            d="M1.5 5.5L5 2l3.5 3.5M1.5 8.5L5 12l3.5-3.5"
+            d="M1 1.5L5 5l4-3.5"
             fill="none"
             stroke="currentColor"
-            strokeWidth="1.4"
+            strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           />

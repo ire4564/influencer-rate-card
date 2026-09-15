@@ -163,10 +163,16 @@
   opacity: 0.6;
 }
 
+/* 평소엔 아래 화살표, 드롭다운이 열리면 위 화살표 */
 .lang__arrow {
-  width: 9px;
-  height: 13px;
-  opacity: 0.75;
+  width: 10px;
+  height: 6px;
+  opacity: 0.8;
+  transition: transform 0.2s;
+}
+
+.lang.is-open .lang__arrow {
+  transform: rotate(180deg);
 }
 
 .lang__menu {
