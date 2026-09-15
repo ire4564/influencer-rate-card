@@ -49,11 +49,6 @@ export const extraLabels = {
 export const terms = [
   { label: 'VAT', value: 'All rates include VAT' },
   {
-    label: 'Extra production',
-    value:
-      'Scripting, product comparison or how-to explanations, voice-over and caption editing, or multi-scene shoots are quoted separately',
-  },
-  {
     label: 'Scope',
     value: 'Production and upload on @kimwood.zip · any further use is discussed separately',
   },

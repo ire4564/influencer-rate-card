@@ -139,11 +139,6 @@ export const extras = [
 
 export const terms = [
   { label: '부가세', value: '모든 단가 부가세 포함' },
-  {
-    label: '제작 요소 추가',
-    value:
-      '대본 작성, 제품 비교 · 사용법 설명, 음성 · 자막 편집, 다수 장면 촬영 등 제작 범위가 늘어나는 경우 별도 비용 협의',
-  },
   { label: '제작 범위', value: '콘텐츠 제작 및 @kimwood.zip 계정 업로드 · 2차 활용은 별도 논의' },
   { label: '수정 횟수', value: '기본 1회 포함' },
   { label: '콘텐츠 유지 기간', value: '6개월 추가 비용 없음 · 1년 +30,000원 · 1년 이상 협의' },
